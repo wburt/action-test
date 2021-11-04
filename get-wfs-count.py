@@ -40,10 +40,7 @@ def make_plt(feature_name,input_csv='feature-counts.csv', output='plot.png'):
     feat_plt = seaborn.lineplot(x='cnt_date',y='hitcount',data=df,hue='feature')
     fig = feat_plt.get_figure()
     fig.savefig(output)
-    del fig
-    del feat_plt
-    del df
-    
+    fig.clf()    
 
 if __name__=='__main__':
     for feature in FEATURES:
