@@ -1,4 +1,4 @@
-name: scraper-san-juan-gobierno
+name: data-health-check
 
 on:
   schedule:
