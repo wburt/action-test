@@ -2,7 +2,7 @@ name: data-health-check
 
 on:
   schedule:
-    - cron: '0 2 * * *' # runs at 02:00 UTC everyday
+    - cron: '0 * * * *' # runs at 02:00 UTC everyday
 
 jobs:
   build:
