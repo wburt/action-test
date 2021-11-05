@@ -26,7 +26,6 @@ jobs:
         run: python get-wfs-count.py
           
       - name: commit files
-        uses: actions/checkout@v2
         run: |
           git config --local user.email action@github.com
           git config --local user.name gitHub-action
