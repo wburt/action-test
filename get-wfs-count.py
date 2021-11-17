@@ -3,8 +3,10 @@ import os
 import requests
 import csv
 import pandas as pd
-import seaborn
+import seaborn as sns
 from datetime import date, datetime
+from pandas.plotting import register_matplotlib_converters
+register_matplotlib_converters()
 
 FEATURES=['WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LINE_SP','WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LOC_SP']
 
@@ -36,8 +38,13 @@ def record(feature_name,count,filename='feature-counts.csv'):
     return True
 
 def make_plt(feature_name,input_csv='feature-counts.csv', output='plot.png'):
-    df = pd.read_csv(input_csv)
-    feat_plt = seaborn.lineplot(x='cnt_date',y='hitcount',data=df,hue='feature')
+    df = pd.read_csv(input_csv,parse_dates=['cnt_date'])
+    x_min = datetime.now() - timedelta(weeks=12)
+    filter = (df['cnt_date']>x_min)
+    df = df.loc[filter]
+    sns.set_theme(style="darkgrid")
+    feat_plt = sns.lineplot(x='cnt_date',y='hitcount',data=df,hue='feature')
+    feat_plt.set(xlabel='Date',ylabel='cnt')
     fig = feat_plt.get_figure()
     fig.savefig(output)
     fig.clf()    
