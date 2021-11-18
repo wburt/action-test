@@ -4,7 +4,8 @@ import requests
 import csv
 import pandas as pd
 import seaborn as sns
-from datetime import date, datetime
+from datetime import datetime, timedelta
+
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
