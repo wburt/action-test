@@ -45,6 +45,7 @@ def make_plt(feature_name,input_csv='feature-counts.csv', output='plot.png'):
     df = df.loc[filter]
     sns.set_theme(style="darkgrid")
     feat_plt = sns.lineplot(x='cnt_date',y='hitcount',data=df,hue='feature')
+    feat_plt.figure.autoformat_xdate()
     feat_plt.set(xlabel='Date',ylabel='cnt')
     fig = feat_plt.get_figure()
     fig.savefig(output)
