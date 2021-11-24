@@ -3,7 +3,6 @@ import os
 import requests
 import csv
 import pandas as pd
-import seaborn as sns
 from datetime import datetime, timedelta
 
 from pandas.plotting import register_matplotlib_converters
@@ -38,18 +37,20 @@ def record(feature_name,count,filename='feature-counts.csv'):
         csv_writer.writerow([day,feature_name,count])
     return True
 
-def make_plt(feature_name,input_csv='feature-counts.csv', output='plot.png'):
+def make_plt(feature_name, input_csv="feature_counts.csv",output ="plot.png"):
     df = pd.read_csv(input_csv,parse_dates=['cnt_date'])
     x_min = datetime.now() - timedelta(weeks=12)
     filter = (df['cnt_date']>x_min)
     df = df.loc[filter]
-    sns.set_theme(style="darkgrid")
-    feat_plt = sns.lineplot(x='cnt_date',y='hitcount',data=df,hue='feature')
-    feat_plt.figure.autoformat_xdate()
-    feat_plt.set(xlabel='Date',ylabel='cnt')
-    fig = feat_plt.get_figure()
-    fig.savefig(output)
-    fig.clf()    
+    feat_plot = df.plot(kind='line', x='cnt_date', y='hitcount', grid='True')
+    feat_plot.set(xlabel='Date', ylabel='Count',)
+    feat_plot.patch.set_facecolor('gainsboro')
+    feat_plot.grid(color='white')
+    L = feat_plot.legend()
+    L.get_texts()[0].set_text(feature_name)
+    fig = feat_plot.get_figure()
+    fig.savefig(output,bbox_inches='tight')
+    fig.clf()   
 
 if __name__=='__main__':
     for feature in FEATURES:
