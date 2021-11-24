@@ -37,7 +37,7 @@ def record(feature_name,count,filename='feature-counts.csv'):
         csv_writer.writerow([day,feature_name,count])
     return True
 
-def make_plt(feature_name, input_csv='feature_counts.csv',output='plot.png'):
+def make_plt(feature_name, input_csv='feature_counts.csv', output='plot.png'):
     df = pd.read_csv(input_csv,parse_dates=['cnt_date'])
     x_min = datetime.now() - timedelta(weeks=12)
     filter = (df['cnt_date']>x_min)
