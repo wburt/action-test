@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
-FEATURES=['WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LINE_SP','WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LOC_SP']
+FEATURES=['WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LINE_SP','WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LOC_SP','WHSE_WATER_MANAGEMENT.WLS_WATER_RESERVE_LOC_SVW']
 
 def get_wfs_count(feature_name='WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LINE_SP',url="https://openmaps.gov.bc.ca/geo/pub/ows?"):
     ''' Returns the total feature count for the feature at wfs url'''
