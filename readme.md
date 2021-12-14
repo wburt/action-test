@@ -5,3 +5,7 @@ This has an action to monitor health of wfs data
 ![](./WLS_WATER_LICENCED_WRK_LINE_SP.png)
 ## Licenced Works (Points)
 ![](./WLS_WATER_LICENCED_WRK_LOC_SP.png)
+## Reserves
+![](./WLS_WATER_RESERVE_LOC_SVW.png)
+## Restrictions
+![](./WLS_WATER_RESTRICTION_LOC_SVW.png)
