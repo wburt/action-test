@@ -57,7 +57,7 @@ if __name__=='__main__':
         feature_name = feature.split('.')[-1]
         csv_file = feature_name + '_counts.csv'
         c = get_wfs_count(feature_name=feature)
-        # r = record(feature_name=feature_name,count=c,filename=csv_file)
-        # if r is True:
-        #     f = feature_name + '.png'
-        #     make_plt(feature_name=feature_name,input_csv=csv_file,output=f)
+        r = record(feature_name=feature_name,count=c,filename=csv_file)
+        if r is True:
+            f = feature_name + '.png'
+            make_plt(feature_name=feature_name,input_csv=csv_file,output=f)
