@@ -8,8 +8,7 @@ from datetime import datetime, timedelta
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
-FEATURES=['WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LINE_SP','WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LOC_SP',
-'WHSE_WATER_MANAGEMENT.WLS_WATER_RESERVE_LOC_SVW','WHSE_WATER_MANAGEMENT.WLS_WATER_RESTRICTION_LOC_SVW']
+FEATURES=['WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LINE_SP','WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LOC_SP']
 
 def get_wfs_count(feature_name='WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LINE_SP',url="https://openmaps.gov.bc.ca/geo/pub/ows?"):
     ''' Returns the total feature count for the feature at wfs url'''
@@ -58,7 +57,7 @@ if __name__=='__main__':
         feature_name = feature.split('.')[-1]
         csv_file = feature_name + '_counts.csv'
         c = get_wfs_count(feature_name=feature)
-        r = record(feature_name=feature_name,count=c,filename=csv_file)
-        if r is True:
-            f = feature_name + '.png'
-            make_plt(feature_name=feature_name,input_csv=csv_file,output=f)
+        # r = record(feature_name=feature_name,count=c,filename=csv_file)
+        # if r is True:
+        #     f = feature_name + '.png'
+        #     make_plt(feature_name=feature_name,input_csv=csv_file,output=f)
