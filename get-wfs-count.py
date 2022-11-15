@@ -3,10 +3,13 @@ import os
 import requests
 import csv
 import pandas as pd
+from time import sleep
 from datetime import datetime, timedelta
+import logging
 
 from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
+logger = logging.getLogger(__name__)
 
 FEATURES=['WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LINE_SP','WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LOC_SP']
 
@@ -18,11 +21,20 @@ def get_wfs_count(feature_name='WHSE_WATER_MANAGEMENT.WLS_WATER_LICENCED_WRK_LIN
         'typeName':f'pub:{feature_name}',
         'resultType':'hits',
         'outputFormat':'json'}
-
+    logger.info('Get count for: {feature_name}')
     r = requests.get(url,params)
 
     matched = [s for s in r.text.split(' ') if "numberMatched=" in s]
+    # if service is not responsive
+    while len(matched)==0:
+        logger.info(f'Failed to return count response is:\n {r} ')
+        sleep(15)
+        logger.info('Retry')
+        r = requests.get(url,params)
+        matched = [s for s in r.text.split(' ') if "numberMatched=" in s]
+
     count = int(matched[0].split('=')[1].replace('"',''))
+    logger.info(f'count={count}')
     return count
 
 
