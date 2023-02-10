@@ -50,11 +50,22 @@ def record(feature_name,count,filename='feature-counts.csv'):
     return True
 
 def make_plt(feature_name, input_csv='feature_counts.csv', output='plot.png'):
+    # pd.set_option('display.float_format', lambda x: '%.3f' % x)
     df = pd.read_csv(input_csv,parse_dates=['cnt_date'])
     x_min = datetime.now() - timedelta(weeks=12)
     filter = (df['cnt_date']>x_min)
     df = df.loc[filter]
-    feat_plot = df.plot(kind='line', x='cnt_date', y='hitcount', grid='True')
+    y_max = (int(df['hitcount'].max()/100)+1)*100
+    if y_max > 100000:
+        y_min = int(df['hitcount'].min()/100)*100
+        ticks = [t for t in range(y_min,y_max,20)]
+        if len(ticks)>10:
+            ticks = [t for t in range(y_min,y_max,50)]
+        if len(ticks)>10:
+            ticks = [t for t in range(y_min,y_max,100)]
+        feat_plot = df.plot(kind='line', x='cnt_date', y='hitcount', grid='True',yticks=ticks)
+    else:
+        feat_plot = df.plot(kind='line', x='cnt_date', y='hitcount', grid='True')
     feat_plot.set(xlabel='Date', ylabel='Count',)
     feat_plot.patch.set_facecolor('gainsboro')
     feat_plot.grid(color='white')
